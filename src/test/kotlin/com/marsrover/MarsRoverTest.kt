@@ -105,5 +105,15 @@ class MarsRoverTest {
 
         assertThat(rover.direction).isEqualTo(W)
     }
+
+    @Test
+    fun `a rover can turn right`() {
+        val rover = Rover(position = Position(row = 0, column = 0), direction = N)
+        val grid = Grid(rows = 10, columns = 10, obstacles = listOf(Position(1,0)))
+
+        MarsRover(rover, grid).turn(R)
+
+        assertThat(rover.direction).isEqualTo(E)
+    }
 }
 

@@ -7,10 +7,8 @@ class MarsRover(private val rover: Rover) {
         if(direction == UP && rover.position.row >= 9) {
             return
         }
-        rover.direction = direction
-        if(direction == UP) {
-            rover.position = Position(rover.position.row + 1, rover.position.column)
-        }
+        val aRover = rover
+        aRover.move(direction)
     }
 
 }

@@ -2,7 +2,7 @@ package com.marsrover
 
 data class Rover(var position: Position, var direction: Direction) {
     fun move() {
-        position = Position(position.row + direction.rowIncrement, position.column + direction.columnIncrement)
+        position = nextPosition()
     }
 
     fun turnLeft() {
@@ -12,4 +12,7 @@ data class Rover(var position: Position, var direction: Direction) {
     fun turnRight() {
         direction = direction.right()
     }
+
+    fun nextPosition() =
+        Position(position.row + direction.rowIncrement, position.column + direction.columnIncrement)
 }

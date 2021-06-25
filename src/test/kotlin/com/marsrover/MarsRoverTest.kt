@@ -1,6 +1,7 @@
 package com.marsrover
 
 import com.marsrover.Direction.*
+import com.marsrover.TurnDirection.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -93,6 +94,16 @@ class MarsRoverTest {
 
         assertThat(rover.direction).isEqualTo(N)
         assertThat(rover.position).isEqualTo(Position(row = 0, column = 0))
+    }
+
+    @Test
+    fun `a rover can turn left`() {
+        val rover = Rover(position = Position(row = 0, column = 0), direction = N)
+        val grid = Grid(rows = 10, columns = 10, obstacles = listOf(Position(1,0)))
+
+        MarsRover(rover, grid).turn(L)
+
+        assertThat(rover.direction).isEqualTo(W)
     }
 }
 

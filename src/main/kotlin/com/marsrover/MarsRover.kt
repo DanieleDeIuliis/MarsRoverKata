@@ -8,11 +8,11 @@ class MarsRover(private val rover: Rover) {
     }
 
     private fun wouldGoOutside(direction: Direction): Boolean {
-        if(rover.position.row + direction.rowIncrement in 9 downTo 0 && rover.position.column + direction.columnIncrement in 9 downTo 0) {
-            return false
-        }
-        return true
+        val positionAfterMove = Position(rover.position.row + direction.rowIncrement, rover.position.column + direction.columnIncrement)
+        return !isPositionInRange(positionAfterMove)
     }
+
+    private fun isPositionInRange(position: Position) = position.row in 0..9 && position.column in 0..9
 
 
 }

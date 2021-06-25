@@ -12,8 +12,8 @@ class MarsRover(private val rover: Rover, private val grid: Grid) {
 
     fun turn(direction: TurnDirection) {
         when (direction) {
-            L -> rover.direction = rover.direction.toLeft()
-            else -> rover.direction = rover.direction.toRight()
+            L -> rover.direction = rover.direction.left()
+            else -> rover.direction = rover.direction.right()
         }
     }
 
@@ -21,6 +21,7 @@ class MarsRover(private val rover: Rover, private val grid: Grid) {
 
     private fun nextPosition(direction: Direction) =
         Position(rover.position.row + direction.rowIncrement, rover.position.column + direction.columnIncrement)
+
     private fun isPositionInRange(position: Position) = position.row in 0..9 && position.column in 0..9
 
 

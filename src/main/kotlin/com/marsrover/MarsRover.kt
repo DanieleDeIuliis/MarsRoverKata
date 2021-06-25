@@ -8,7 +8,7 @@ class MarsRover(private val rover: Rover) {
     }
 
     private fun wouldGoOutside(direction: Direction): Boolean {
-        if(rover.position.row + direction.rowIncrement in 9 downTo 0) {
+        if(rover.position.row + direction.rowIncrement in 9 downTo 0 && rover.position.column + direction.columnIncrement in 9 downTo 0) {
             return false
         }
         return true

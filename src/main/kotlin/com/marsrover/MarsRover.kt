@@ -22,7 +22,7 @@ class MarsRover(private val rover: Rover, private val grid: Grid) {
     private fun nextPosition(direction: Direction) =
         Position(rover.position.row + direction.rowIncrement, rover.position.column + direction.columnIncrement)
 
-    private fun isPositionInRange(position: Position) = position.row in 0..9 && position.column in 0..9
+    private fun isPositionInRange(position: Position) = position.row in 0 until grid.rows && position.column in 0 until grid.columns
 
 
 }

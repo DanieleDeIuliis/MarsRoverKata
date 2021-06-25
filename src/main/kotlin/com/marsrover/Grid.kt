@@ -1,15 +1,13 @@
 package com.marsrover
 
 class Grid(val rows: Int, val columns: Int, obstacles: List<Position>) {
-    private val cells: Array<Array<Boolean>> = Array(rows) { Array(columns) { true } }
+    private val cells: MutableSet<Position> = mutableSetOf()
 
     init {
-        obstacles.forEach { obstacle ->
-            cells[obstacle.row][obstacle.column] = false
-        }
+        obstacles.forEach { cells.add(it) }
     }
 
     fun isAvailable(position: Position): Boolean {
-        return cells[position.row][position.column]
+        return !cells.contains(position)
     }
 }

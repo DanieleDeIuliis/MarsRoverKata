@@ -1,6 +1,7 @@
 package com.marsrover
 
 import com.marsrover.Direction.Companion.DOWN
+import com.marsrover.Direction.Companion.EAST
 import com.marsrover.Direction.Companion.UP
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -44,6 +45,16 @@ class MarsRoverTest {
 
         assertThat(rover.direction).isEqualTo(DOWN)
         assertThat(rover.position).isEqualTo(Position(row = 0, column = 0))
+    }
+
+    @Test
+    fun `move a rover east`() {
+        val rover = Rover(position = Position(row = 0, column = 0), direction = EAST)
+
+        MarsRover(rover).move(EAST)
+
+        assertThat(rover.direction).isEqualTo(EAST)
+        assertThat(rover.position).isEqualTo(Position(row = 0, column = 1))
     }
 }
 

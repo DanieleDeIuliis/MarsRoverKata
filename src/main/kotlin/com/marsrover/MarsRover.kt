@@ -4,9 +4,10 @@ import com.marsrover.TurnDirection.*
 
 class MarsRover(private val rover: Rover, private val grid: Grid) {
 
-    fun move(direction: Direction) {
-        if (invalidMoveTo(direction)) return
-        rover.move(direction)
+    fun move() {
+        if (nextPosition(rover.direction).isValid()) {
+            rover.move()
+        }
     }
 
     fun turn(direction: TurnDirection) {
@@ -16,10 +17,7 @@ class MarsRover(private val rover: Rover, private val grid: Grid) {
         }
     }
 
-    private fun invalidMoveTo(direction: Direction): Boolean {
-        return !isValid(nextPosition(direction))
-    }
-    private fun isValid(position: Position): Boolean = isPositionInRange(position) && grid.isAvailable(position)
+    private fun Position.isValid(): Boolean = isPositionInRange(this) && grid.isAvailable(this)
 
     private fun nextPosition(direction: Direction) =
         Position(rover.position.row + direction.rowIncrement, rover.position.column + direction.columnIncrement)

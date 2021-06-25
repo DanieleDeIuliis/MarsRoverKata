@@ -35,5 +35,15 @@ class MarsRoverTest {
         assertThat(rover.direction).isEqualTo(DOWN)
         assertThat(rover.position).isEqualTo(Position(row = 8, column = 0))
     }
+
+    @Test
+    fun `a rover can't move down if the landing position is outside the grid`() {
+        val rover = Rover(position = Position(row = 0, column = 0), direction = DOWN)
+
+        MarsRover(rover).move(DOWN)
+
+        assertThat(rover.direction).isEqualTo(DOWN)
+        assertThat(rover.position).isEqualTo(Position(row = 0, column = 0))
+    }
 }
 

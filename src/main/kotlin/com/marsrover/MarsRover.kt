@@ -18,8 +18,11 @@ class MarsRover(private val rover: Rover, private val grid: Grid) {
         }
     }
 
-    private fun Position.isValid(): Boolean = isPositionInRange(this) && grid.isAvailable(this)
+    fun finalPosition(): String {
+        TODO("Not yet implemented")
+    }
 
+    private fun Position.isValid(): Boolean = isPositionInRange(this) && grid.isAvailable(this)
     private fun isPositionInRange(position: Position) = position.row in 0 until grid.rows && position.column in 0 until grid.columns
 
 

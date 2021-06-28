@@ -14,7 +14,7 @@ class MarsRover(private val rover: Rover, private val grid: Grid) {
     fun turn(direction: TurnDirection) {
         when (direction) {
             LEFT -> rover.turnLeft()
-            R -> rover.turnRight()
+            RIGHT -> rover.turnRight()
         }
     }
 

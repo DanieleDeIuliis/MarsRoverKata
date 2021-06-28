@@ -40,5 +40,27 @@ class MarsRoverConsoleTest {
         verify { marsRover.turn(LEFT) }
         verify { ioStream.writeOutput("0:0:W") }
     }
+
+    @Test
+    fun `rotate a rover right`() {
+        every { ioStream.readInput() } returns "R"
+        every { marsRover.finalPosition() } returns "0:0:E"
+        val marsRoverConsole = MarsRoverConsole(ioStream, marsRover)
+        marsRoverConsole.moveRoverOnMars()
+        verify { marsRover.turn(RIGHT) }
+        verify { ioStream.writeOutput("0:0:E") }
+    }
+
+    @Test
+    fun `a rover can't move over an obstacle`() {
+        every { ioStream.readInput() } returns "M"
+        every { marsRover.finalPosition() } returns "0:0:N"
+        every { marsRover.move() } throws ObstacleInPositionException()
+
+        val marsRoverConsole = MarsRoverConsole(ioStream, marsRover)
+        marsRoverConsole.moveRoverOnMars()
+
+        verify { ioStream.writeOutput("0:0:0:N") }
+    }
 }
 

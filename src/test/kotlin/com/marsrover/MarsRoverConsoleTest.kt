@@ -1,5 +1,6 @@
 package com.marsrover
 
+import com.marsrover.TurnDirection.*
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -28,6 +29,16 @@ class MarsRoverConsoleTest {
         marsRoverConsole.moveRoverOnMars()
         verify(exactly = 2) { marsRover.move() }
         verify { ioStream.writeOutput("2:0:N") }
+    }
+
+    @Test
+    fun `rotate a rover left`() {
+        every { ioStream.readInput() } returns "L"
+        every { marsRover.finalPosition() } returns "0:0:W"
+        val marsRoverConsole = MarsRoverConsole(ioStream, marsRover)
+        marsRoverConsole.moveRoverOnMars()
+        verify { marsRover.turn(L) }
+        verify { ioStream.writeOutput("0:0:W") }
     }
 }
 

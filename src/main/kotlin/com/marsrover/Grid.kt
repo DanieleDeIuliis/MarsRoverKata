@@ -8,6 +8,9 @@ class Grid(val rows: Int, val columns: Int, obstacles: List<Position>) {
     }
 
     fun isAvailable(position: Position): Boolean {
-        return !cells.contains(position)
+        if(cells.contains(position)) {
+            throw ObstacleInPositionException()
+        }
+        return true
     }
 }

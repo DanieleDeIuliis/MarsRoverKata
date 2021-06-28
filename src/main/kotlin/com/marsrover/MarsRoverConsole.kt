@@ -9,7 +9,7 @@ class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: Ma
             if(command == 'M') {
                 marsRover.move()
             } else if(command == 'L') {
-                marsRover.turn(L)
+                marsRover.turn(LEFT)
             }
         }
         val output = marsRover.finalPosition()

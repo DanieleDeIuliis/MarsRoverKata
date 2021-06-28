@@ -102,7 +102,7 @@ class MarsRoverTest {
         val rover = Rover(position = Position(row = 0, column = 0), direction = N)
         val grid = Grid(rows = 10, columns = 10, obstacles = listOf(Position(1,0)))
 
-        MarsRover(rover, grid).turn(L)
+        MarsRover(rover, grid).turn(LEFT)
 
         assertThat(rover.direction).isEqualTo(W)
     }

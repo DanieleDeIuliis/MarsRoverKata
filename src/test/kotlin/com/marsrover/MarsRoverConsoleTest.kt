@@ -37,7 +37,7 @@ class MarsRoverConsoleTest {
         every { marsRover.finalPosition() } returns "0:0:W"
         val marsRoverConsole = MarsRoverConsole(ioStream, marsRover)
         marsRoverConsole.moveRoverOnMars()
-        verify { marsRover.turn(L) }
+        verify { marsRover.turn(LEFT) }
         verify { ioStream.writeOutput("0:0:W") }
     }
 }

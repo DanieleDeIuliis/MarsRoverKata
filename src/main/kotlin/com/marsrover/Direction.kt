@@ -24,5 +24,5 @@ enum class Direction(val rowIncrement: Int, val columnIncrement: Int) {
 }
 
 enum class TurnDirection {
-    L, R;
+    LEFT, R;
 }

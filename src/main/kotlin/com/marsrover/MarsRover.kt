@@ -13,7 +13,7 @@ class MarsRover(private val rover: Rover, private val grid: Grid) {
 
     fun turn(direction: TurnDirection) {
         when (direction) {
-            L -> rover.turnLeft()
+            LEFT -> rover.turnLeft()
             R -> rover.turnRight()
         }
     }

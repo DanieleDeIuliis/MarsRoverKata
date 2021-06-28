@@ -19,11 +19,10 @@ class MarsRover(private val rover: Rover, private val grid: Grid) {
     }
 
     fun finalPosition(): String {
-        TODO("Not yet implemented")
+        return "${rover.position.row}:${rover.position.column}:${rover.direction.name}"
     }
 
     private fun Position.isValid(): Boolean = isPositionInRange(this) && grid.isAvailable(this)
     private fun isPositionInRange(position: Position) = position.row in 0 until grid.rows && position.column in 0 until grid.columns
-
 
 }

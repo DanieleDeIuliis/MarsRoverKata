@@ -5,22 +5,19 @@ import com.marsrover.TurnDirection.*
 class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: MarsRover) {
     fun moveRoverOnMars() {
         val input = ioStream.readInput()
-        var output = ""
+        var outputPrefix = ""
         input.forEach { command ->
-            if(command == 'M') {
-                try {
-                    marsRover.move()
-                } catch (e: ObstacleInPositionException) {
-                    output = "0:"
-                }
-            } else if(command == 'L') {
-                marsRover.turn(LEFT)
-            } else if(command == 'R') {
-                marsRover.turn(RIGHT)
+            when (command) {
+                'M' -> try {
+                        marsRover.move()
+                    } catch (e: ObstacleInPositionException) {
+                    outputPrefix = "0:"
+                    }
+                'L' -> marsRover.turn(LEFT)
+                'R' -> marsRover.turn(RIGHT)
             }
         }
-        output += marsRover.finalPosition()
+        val output =  outputPrefix + marsRover.finalPosition()
         ioStream.writeOutput(output)
     }
-
 }

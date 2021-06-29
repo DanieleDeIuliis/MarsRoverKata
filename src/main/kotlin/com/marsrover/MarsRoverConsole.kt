@@ -1,7 +1,6 @@
 package com.marsrover
 
 import com.marsrover.TurnDirection.*
-
 class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: MarsRover) {
     fun moveRoverOnMars() {
         val input = ioStream.readInput()
@@ -17,7 +16,13 @@ class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: Ma
                 'R' -> marsRover.turn(RIGHT)
             }
         }
-        val output =  outputPrefix + marsRover.finalPosition()
+        val output =  outputPrefix + finalFormattedState()
         ioStream.writeOutput(output)
     }
+
+    private fun finalFormattedState(): String {
+        val finalState = marsRover.finalState()
+        return "${finalState.position.row}:${finalState.position.column}:${finalState.direction.name}"
+    }
 }
+

@@ -1,5 +1,6 @@
 package com.marsrover
 
+import com.marsrover.Direction.*
 import com.marsrover.TurnDirection.*
 import io.mockk.every
 import io.mockk.mockk
@@ -14,7 +15,7 @@ class MarsRoverConsoleTest {
     @Test
     fun `moves a rover on mars with standard initialization`() {
         every { ioStream.readInput() } returns "M"
-        every { marsRover.finalPosition() } returns "1:0:N"
+        every { marsRover.finalState() } returns Rover(Position(1,0), N)
         val marsRoverConsole = MarsRoverConsole(ioStream, marsRover)
         marsRoverConsole.moveRoverOnMars()
         verify { marsRover.move() }
@@ -24,7 +25,7 @@ class MarsRoverConsoleTest {
     @Test
     fun `moves a rover north twice`() {
         every { ioStream.readInput() } returns "MM"
-        every { marsRover.finalPosition() } returns "2:0:N"
+        every { marsRover.finalState() } returns Rover(Position(2,0), N)
         val marsRoverConsole = MarsRoverConsole(ioStream, marsRover)
         marsRoverConsole.moveRoverOnMars()
         verify(exactly = 2) { marsRover.move() }
@@ -34,7 +35,7 @@ class MarsRoverConsoleTest {
     @Test
     fun `rotate a rover left`() {
         every { ioStream.readInput() } returns "L"
-        every { marsRover.finalPosition() } returns "0:0:W"
+        every { marsRover.finalState() } returns Rover(Position(0,0), W)
         val marsRoverConsole = MarsRoverConsole(ioStream, marsRover)
         marsRoverConsole.moveRoverOnMars()
         verify { marsRover.turn(LEFT) }
@@ -44,7 +45,7 @@ class MarsRoverConsoleTest {
     @Test
     fun `rotate a rover right`() {
         every { ioStream.readInput() } returns "R"
-        every { marsRover.finalPosition() } returns "0:0:E"
+        every { marsRover.finalState() } returns Rover(Position(0,0), E)
         val marsRoverConsole = MarsRoverConsole(ioStream, marsRover)
         marsRoverConsole.moveRoverOnMars()
         verify { marsRover.turn(RIGHT) }
@@ -54,7 +55,7 @@ class MarsRoverConsoleTest {
     @Test
     fun `a rover can't move over an obstacle`() {
         every { ioStream.readInput() } returns "M"
-        every { marsRover.finalPosition() } returns "0:0:N"
+        every { marsRover.finalState() } returns Rover(Position(0,0), N)
         every { marsRover.move() } throws ObstacleInPositionException()
 
         val marsRoverConsole = MarsRoverConsole(ioStream, marsRover)

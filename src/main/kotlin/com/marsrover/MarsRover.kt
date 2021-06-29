@@ -18,8 +18,8 @@ class MarsRover(private val rover: Rover, private val grid: Grid) {
         }
     }
 
-    fun finalPosition(): String {
-        return "${rover.position.row}:${rover.position.column}:${rover.direction.name}"
+    fun finalState(): Rover {
+        return rover
     }
 
     private fun Position.isValid(): Boolean = isPositionInRange(this) && grid.isAvailable(this)

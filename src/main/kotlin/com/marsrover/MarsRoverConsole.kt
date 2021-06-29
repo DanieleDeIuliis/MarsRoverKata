@@ -22,7 +22,11 @@ class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: Ma
     }
 
     private fun MarsRover.formattedStateString(): String {
-        return "${state.position.row}:${state.position.column}:${state.direction.parsedName()}"
+        return state.toFormattedString()
+    }
+
+    private fun RoverState.toFormattedString(): String {
+        return "${position.row}:${position.column}:${direction.parsedName()}"
     }
 
     private fun Direction.parsedName(): String {

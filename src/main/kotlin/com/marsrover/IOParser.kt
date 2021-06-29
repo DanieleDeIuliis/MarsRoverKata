@@ -25,15 +25,15 @@ class IOParser(private val marsRover: MarsRover) {
     }
 
     private fun Rover.toFormattedString(): String {
-        return "${position.row}:${position.column}:${direction.parsedName()}"
+        return "${position.row}:${position.column}:${state.parsedName()}"
     }
 
-    private fun Direction.parsedName(): String {
-        return when(this) {
-            Direction.NORTH -> "N"
-            Direction.SOUTH -> "S"
-            Direction.EAST -> "E"
-            Direction.WEST -> "W"
+    private fun State.parsedName(): String {
+        return when (this) {
+            is North -> "N"
+            is East -> "E"
+            is West -> "W"
+            is South -> "S"
         }
     }
 }

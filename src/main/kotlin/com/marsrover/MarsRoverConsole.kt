@@ -1,5 +1,6 @@
 package com.marsrover
 
+import com.marsrover.Direction.*
 import com.marsrover.TurnDirection.*
 class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: MarsRover) {
     fun moveRoverOnMars() {
@@ -21,7 +22,16 @@ class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: Ma
     }
 
     private fun MarsRover.formattedStateString(): String {
-        return "${state.position.row}:${state.position.column}:${state.direction.name}"
+        return "${state.position.row}:${state.position.column}:${state.direction.parsedName()}"
+    }
+
+    private fun Direction.parsedName(): String {
+        return when(this) {
+            NORTH -> "N"
+            SOUTH -> "S"
+            EAST -> "E"
+            WEST -> "W"
+        }
     }
 }
 

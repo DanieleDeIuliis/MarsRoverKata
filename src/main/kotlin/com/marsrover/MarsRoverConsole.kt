@@ -12,7 +12,7 @@ class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: Ma
         } catch (e: ObstacleInPositionException) {
             outputPrefix = "0:"
         }
-        val output = outputPrefix + marsRover.formattedStateString()
+        val output = outputPrefix + marsRover.formattedFinalStateString()
         ioStream.writeOutput(output)
     }
 
@@ -30,11 +30,11 @@ class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: Ma
         }
     }
 
-    private fun MarsRover.formattedStateString(): String {
-        return state.toFormattedString()
+    private fun MarsRover.formattedFinalStateString(): String {
+        return rover.toFormattedString()
     }
 
-    private fun RoverState.toFormattedString(): String {
+    private fun Rover.toFormattedString(): String {
         return "${position.row}:${position.column}:${direction.parsedName()}"
     }
 

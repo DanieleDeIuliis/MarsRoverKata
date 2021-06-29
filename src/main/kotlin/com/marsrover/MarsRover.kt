@@ -2,24 +2,20 @@ package com.marsrover
 
 import com.marsrover.TurnDirection.*
 
-class MarsRover(private val rover: Rover, private val grid: Grid) {
+class MarsRover(val state: RoverState, private val grid: Grid) {
 
     fun move() {
-        val nextPosition = rover.nextPosition()
+        val nextPosition = state.nextPosition()
         if (nextPosition.isValid()) {
-            rover.move()
+            state.move()
         }
     }
 
     fun turn(direction: TurnDirection) {
         when (direction) {
-            LEFT -> rover.turnLeft()
-            RIGHT -> rover.turnRight()
+            LEFT -> state.turnLeft()
+            RIGHT -> state.turnRight()
         }
-    }
-
-    fun finalState(): Rover {
-        return rover
     }
 
     private fun Position.isValid(): Boolean = isPositionInRange(this) && grid.isAvailable(this)

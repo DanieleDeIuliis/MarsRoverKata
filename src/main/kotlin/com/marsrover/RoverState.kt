@@ -1,6 +1,6 @@
 package com.marsrover
 
-class Rover(var position: Position, var direction: Direction) {
+class RoverState(var position: Position, var direction: Direction) {
     fun move() {
         position = nextPosition()
     }

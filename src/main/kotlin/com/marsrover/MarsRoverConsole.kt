@@ -16,13 +16,12 @@ class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: Ma
                 'R' -> marsRover.turn(RIGHT)
             }
         }
-        val output =  outputPrefix + finalFormattedState()
+        val output =  outputPrefix + marsRover.formattedStateString()
         ioStream.writeOutput(output)
     }
 
-    private fun finalFormattedState(): String {
-        val finalState = marsRover.finalState()
-        return "${finalState.position.row}:${finalState.position.column}:${finalState.direction.name}"
+    private fun MarsRover.formattedStateString(): String {
+        return "${state.position.row}:${state.position.column}:${state.direction.name}"
     }
 }
 

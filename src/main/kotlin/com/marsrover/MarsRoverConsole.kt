@@ -3,6 +3,22 @@ package com.marsrover
 import com.marsrover.Direction.*
 import com.marsrover.TurnDirection.*
 
+interface Command {
+    fun execute()
+}
+
+class Move(private val marsRover: MarsRover): Command {
+    override fun execute() {
+        marsRover.move()
+    }
+}
+
+class Turn(private val marsRover: MarsRover, private val turnDirection: TurnDirection): Command {
+    override fun execute() {
+        marsRover.turn(turnDirection)
+    }
+}
+
 class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: MarsRover) {
 
     fun moveRoverOnMars() {
@@ -16,18 +32,18 @@ class MarsRoverConsole(private val ioStream: IOStream, private val marsRover: Ma
         ioStream.writeOutput(output)
     }
 
-    private fun executeCommands() {
-        ioStream.readInput().forEach { command ->
-            execute(command)
-        }
+    private fun parseCommands(input: String): List<Command> {
+        return input.map { command(it) }
     }
 
-    private fun execute(command: Char) {
-        when (command) {
-            'M' -> marsRover.move()
-            'L' -> marsRover.turn(LEFT)
-            'R' -> marsRover.turn(RIGHT)
-        }
+    private fun command(singleCommand: Char) = when (singleCommand) {
+        'M' -> Move(marsRover)
+        'L' -> Turn(marsRover, LEFT)
+        else -> Turn(marsRover, RIGHT)
+    }
+
+    private fun executeCommands() {
+        parseCommands(ioStream.readInput()).forEach { it.execute() }
     }
 
     private fun MarsRover.formattedFinalStateString(): String {
